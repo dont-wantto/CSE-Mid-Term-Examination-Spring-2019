@@ -1,0 +1,201 @@
+1)c)                                                                                                               
+corrected code is given below :
+#include <iostream>                                                                                                      
+#include <string> 
+using namespace std; 
+ 
+void demo() 
+{ 
+ static int count = 0; 
+ cout << count << " "; 
+ 
+ count++; 
+} 
+int main() 
+{ 
+ for (int i=0; i<5; i++){ 
+ demo(); 
+ }
+ return 0; 
+}
+output: 0 1 2 3 4
+
+2)a)
+#include <iostream>
+using namespace std;
+class Line {
+ public:
+ void setLength( double len );
+ double getLength( void );
+ Line(); 
+ ~Line(); 
+ private:
+ double length;
+};
+Line::Line(void) {
+ cout << "Object created" << endl;
+}
+Line::~Line(void) {
+ cout << "Object is being deleted" << endl;
+}
+void Line::setLength( double len ) {
+ length = len;
+}
+double Line::getLength( void ) {
+ return length;
+}
+int main() {
+ Line line;
+ line.setLength(6.0); 
+ cout << "Length of line : " << 
+line.getLength() <<endl;
+ return 0;
+}
+
+output:
+Object created
+Length of line : 6
+Object is being deleted
+
+2)c)a)
+#include<iostream> 
+using namespace std; 
+int x = 10; 
+void fun(int x) 
+{ 
+ cout << ::x << endl; 
+} 
+int main() 
+{ 
+ fun(5); 
+ return 0; 
+}
+output: 10
+2)c)b)
+#include<iostream>
+using namespace std;
+class Demo {
+ public:
+ int i;
+ Demo(int i) {
+ this->i = i;
+ }
+};
+main() {
+ Demo m(5);
+ cout<<m.i;
+}
+output : 5
+
+3)b)a)
+correct version of the code is given below :
+#include <iostream>
+using namespace std;
+
+class printData {
+public:
+    void print(int i) {
+        cout << i << endl;
+    }
+    
+    void print(double f) {
+        cout << f << endl;
+    }
+    
+    void print(const char* c) {                 /////look here stupidos:
+                                                The parameter of the third print function is changed from char* c to const char* c.
+                                                This change allows the function to accept string literals
+                                                (const character arrays) without causing a type mismatch error.
+                                                
+    cout << c << endl;
+    }
+};
+
+int main() {
+    printData pd;
+    pd.print(500.263);
+    pd.print(5);
+    pd.print("Hello C++");
+    return 0;
+}
+output: 
+500.263
+5
+Hello C++
+
+3)b)b)
+#include<iostream>
+using namespace std;
+class amb{
+public:
+ int i, j;
+ amb(int x, int y){ i = x; j = y; }
+};
+void func(amb a, amb &b){
+ cout << a.i << endl;
+}
+void func(amb a, amb b){
+ cout << b.j << endl;
+}
+int main(){
+ amb ob1(12, 13), ob2(14, 15);
+ func(ob1, ob2);
+ return 0;
+}
+error msg : it has an ambiguity error
+
+3)c)
+#include<iostream>
+using namespace std;
+class MyClass{
+public:
+ MyClass(){ cout<<"Constructing"<<endl; }
+ ~ MyClass(){ cout<<"Destructing"<<endl; }
+};
+
+MyClass aFunction(MyClass m){
+cout<<"In aFunction"<<endl;
+return m;
+}
+int main()
+{
+ cout<<"In Main"<<endl;
+ MyClass ob;
+ ob = aFunction(ob);
+ cout<<"The End"<<endl;
+ return 0;
+}
+output:
+In Main
+Constructing
+In aFunction
+Destructing
+Destructing
+The End
+Destructing
+
+4)a)
+#include<iostream>
+using namespace std;
+int main(){
+ int n = 12;
+ int *p = new int[n];
+ if(!p){
+ cout << "Allocation failed" << endl;
+ }
+ for(int i = 0; i < n; i++){
+ *(p+i) = i +1;
+ }
+ for(int i = 0; i < n; i++){
+ cout << *(p+i) << " ";
+ }
+ delete[] p;
+ return 0;
+}
+
+output:
+1 2 3 4 5 6 7 8 9 10 11 12
+
+
+
+
