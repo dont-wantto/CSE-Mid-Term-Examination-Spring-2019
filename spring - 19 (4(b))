@@ -1,0 +1,38 @@
+4)b)
+corrected code here:
+#include<iostream>
+using namespace std;
+
+class OC {
+private:
+    int i;
+
+public:
+    OC() {  // Default constructor
+        i = 0;
+    }
+
+    OC(int value) {  // Parameterized constructor
+        i = value;
+    }
+
+    OC(const OC& other) {  // Copy constructor
+        i = other.i;
+    }
+
+    void display() {
+        cout << i << endl;
+    }
+};
+
+int main() {
+    OC A(4); // Create OC object A with value 4
+    OC B = A; // Copy constructor: create OC object B and copy A's value
+    OC C; // Default constructor: create OC object C with default value
+    
+    cout << "id of A : "; A.display();
+    cout << "id of B : "; B.display();
+    cout << "id of C : "; C.display();
+    
+    return 0;
+}
